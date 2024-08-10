@@ -35,10 +35,16 @@ const Modal = (props) => {
     closeModalWindow();
   };
 
+  const handleCloseModal = (e) => {
+    if (e.target === e.currentTarget) {
+      closeModalWindow();
+    }
+  };
+
   const { title, date, startTime, endTime, description } = formData;
 
   return (
-    <div className="modal overlay">
+    <div className="modal overlay" onClick={handleCloseModal}>
       <div className="modal__content">
         <div className="create-event">
           <button

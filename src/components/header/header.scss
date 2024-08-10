@@ -26,5 +26,9 @@
 
   &__displayed-month {
     margin-left: 10px;
+
+    &_separator {
+      padding: 0 10px;
+    }
   }
 }

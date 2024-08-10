@@ -10,19 +10,38 @@ import {
 import './common.scss';
 
 const App = () => {
-  const [weekStartDate, setWeekStartDate] = useState(new Date());
+  const [weekStartDate, setWeekStartDate] = useState(null);
   const [isCurrentWeek, setIsCurrentWeek] = useState(true);
 
   useEffect(() => {
-    const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
+    setWeekStartDate(getWeekStartDate(new Date()));
+  }, []);
+
+  useEffect(() => {
+    const weekDates = generateWeekRange(weekStartDate);
     setIsCurrentWeek(isTodayInWeekDates(weekDates));
   }, [weekStartDate]);
 
-  const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
+  const changeWeek = (direction) => {
+    setWeekStartDate((prevDate) => {
+      const newDate = new Date(prevDate);
+      newDate.setDate(prevDate.getDate() + direction * 7);
+      return getWeekStartDate(newDate);
+    });
+  };
+
+  const setCurrentWeek = () => setWeekStartDate(getWeekStartDate(new Date()));
+
+  const weekDates = generateWeekRange(weekStartDate);
+  console.log(weekStartDate);
 
   return (
     <>
-      <Header />
+      <Header
+        weekDates={weekDates}
+        changeWeek={changeWeek}
+        setCurrentWeek={setCurrentWeek}
+      />
       <Calendar weekDates={weekDates} isCurrentWeek={isCurrentWeek} />
       {/* {error && <div className="error-message">{error}</div>} */}
     </>
