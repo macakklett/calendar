@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 export const getWeekStartDate = (date) => {
   const dateCopy = new Date(date);
   const dayOfWeek = dateCopy.getDay();
@@ -28,6 +30,32 @@ export const getDateTime = (date, time) => {
 
 export const formatMins = (mins) => {
   return mins < 10 ? `0${mins}` : mins;
+};
+
+export const isTodayInWeekDates = (weekDates) => {
+  const today = moment().startOf('day');
+  return weekDates.some((date) => moment(date).isSame(today, 'day'));
+};
+
+export const getUkrainianDayNumberOfWeek = () => {
+  const day = new Date().getDay();
+  return day === 0 ? 7 : day;
+};
+
+export const getMinutesPassedTodayPx = () => {
+  const now = new Date();
+  const minutesPassed = now.getHours() * 59 + now.getMinutes();
+  return minutesPassed;
+};
+
+export const getIsToday = (date) => {
+  const today = new Date();
+
+  return (
+    date.getDate() === today.getDate() &&
+    date.getMonth() === today.getMonth() &&
+    date.getFullYear() === today.getFullYear()
+  );
 };
 
 export const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];

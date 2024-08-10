@@ -1,27 +1,32 @@
-import React, { Component } from 'react';
-import Header from './components/header/Header.jsx';
-import Calendar from './components/calendar/Calendar.jsx';
-
-import { getWeekStartDate, generateWeekRange } from '../src/utils/dateUtils.js';
+import React, { useState, useEffect } from 'react';
+import Header from './components/header/Header';
+import Calendar from './components/calendar/Calendar';
+import {
+  getWeekStartDate,
+  generateWeekRange,
+  isTodayInWeekDates,
+} from '../src/utils/dateUtils';
 
 import './common.scss';
 
-class App extends Component {
-  state = {
-    weekStartDate: new Date(),
-  };
+const App = () => {
+  const [weekStartDate, setWeekStartDate] = useState(new Date());
+  const [isCurrentWeek, setIsCurrentWeek] = useState(true);
 
-  render() {
-    const { weekStartDate } = this.state;
+  useEffect(() => {
     const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
+    setIsCurrentWeek(isTodayInWeekDates(weekDates));
+  }, [weekStartDate]);
 
-    return (
-      <>
-        <Header />
-        <Calendar weekDates={weekDates} />
-      </>
-    );
-  }
-}
+  const weekDates = generateWeekRange(getWeekStartDate(weekStartDate));
+
+  return (
+    <>
+      <Header />
+      <Calendar weekDates={weekDates} isCurrentWeek={isCurrentWeek} />
+      {/* {error && <div className="error-message">{error}</div>} */}
+    </>
+  );
+};
 
 export default App;

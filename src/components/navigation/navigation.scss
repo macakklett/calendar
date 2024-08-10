@@ -1,17 +1,44 @@
 .calendar {
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - 60px);
-
   &__header {
     display: flex;
     height: 100px;
     padding-left: 48px;
   }
 
-  &__day {
-    position: relative;
+  &__day-label {
     flex: 1;
-    border-left: 1px solid #eee;
+  }
+}
+
+.day-label {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  opacity: 0.6;
+
+  &__day-name {
+    font-size: 14px;
+    text-transform: uppercase;
+
+    &_current {
+      color: blue;
+    }
+  }
+
+  &__day-number {
+    font-size: 22px;
+
+    &_current {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: blue;
+      color: white;
+    }
   }
 }
