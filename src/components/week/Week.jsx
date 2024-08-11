@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Day from '../day/Day';
 import CurrentTime from '../currentTime/CurrentTime';
 import Modal from '../modal/Modal';
-// import EventModalWindow from '../eventModalWindow/EventModalWindow';
 import { useEvents } from '../../hook/useEvents';
 import moment from 'moment';
 
@@ -16,7 +15,6 @@ const Week = ({ weekDates, isCurrentWeek }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const closeModalWindow = () => setIsModalOpen(false);
-  const closeEventModalWindow = () => setIsOpenEventWindow(false);
 
   const handleWeek = (e) => {
     console.log(e.target);
@@ -54,13 +52,6 @@ const Week = ({ weekDates, isCurrentWeek }) => {
         isModalOpen={isModalOpen}
         closeModalWindow={closeModalWindow}
       />
-      {/* {isOpenEventWindow && (
-        <EventModalWindow
-          eventId={eventId}
-          coordinates={coordinatesOfClickMouse}
-          closeEventModalWindow={closeEventModalWindow}
-        />
-      )} */}
       <div className="calendar__week" onClick={handleWeek}>
         {isCurrentWeek && <CurrentTime />}
         {weekDates.map((dayStart) => {
