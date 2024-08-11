@@ -5,34 +5,10 @@
 
   &__body {
     display: flex;
-    overflow: auto;
   }
 
   &__week-container {
     display: flex;
     width: 100%;
-    height: fit-content;
-  }
-
-  &__time-scale {
-    height: 100%;
-    width: 48px;
-  }
-
-  &__week {
-    display: flex;
-    flex: 1;
-  }
-
-  &__day {
-    position: relative;
-    flex: 1;
-    border-left: 1px solid #eee;
-  }
-
-  &__time-slot {
-    height: 59px;
-    position: relative;
-    border-bottom: 1px solid #eee;
   }
 }

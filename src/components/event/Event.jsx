@@ -4,28 +4,40 @@ import EventModalWindow from '../eventModalWindow/EventModalWindow';
 import './event.scss';
 
 const Event = ({ height, marginTop, title, time, eventId }) => {
-  // const [isOpetEventWindow, setIsOpetEventWindow] = useState(false);
+  const [isOpenEventWindow, setIsOpenEventWindow] = useState(false);
+  const [coordinatesOfClickMouse, setCoordinatesOfClickMouse] = useState(null);
+
+  const closeEventModalWindow = () => setIsOpenEventWindow(false);
+
   const eventStyle = {
     height,
-    marginTop,
+    marginTop: marginTop + '3px',
   };
 
-  // const handleEvent = (e) => {
-  //   console.log(e.target.closest('.event').dataset.event);
-  //   setIsOpetEventWindow(true);
-  // };
+  const handleOptionsEvent = (e) => {
+    setCoordinatesOfClickMouse([e.clientX, e.clientY]);
+    setIsOpenEventWindow(true);
+  };
 
   return (
-    <div
-      style={eventStyle}
-      className="event"
-      data-event={eventId}
-      // onClick={handleEvent}
-    >
-      {/* {isOpetEventWindow && <EventModalWindow eventId={eventId} />} */}
-      <div className="event__title">{title}</div>
-      <div className="event__time">{time}</div>
-    </div>
+    <>
+      {isOpenEventWindow && (
+        <EventModalWindow
+          eventId={eventId}
+          closeEventModalWindow={closeEventModalWindow}
+          coordinates={coordinatesOfClickMouse}
+        />
+      )}
+      <div
+        style={eventStyle}
+        className="event"
+        data-event={eventId}
+        onClick={handleOptionsEvent}
+      >
+        <div className="event__title">{title}</div>
+        <div className="event__time">{time}</div>
+      </div>
+    </>
   );
 };
 

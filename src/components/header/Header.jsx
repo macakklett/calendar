@@ -51,13 +51,17 @@ const Header = ({ weekDates, changeWeek, setCurrentWeek }) => {
           >
             <i className="fas fa-chevron-right"></i>
           </button>
-          <span className="navigation__displayed-month">{firstMonthName}</span>
-          {firstMonthName !== lastMonthName && (
-            <span className="navigation__displayed-month">
-              <span className="navigation__displayed-month_separator">-</span>{' '}
-              {lastMonthName}
+          <div className="navigation__displayed-month">
+            <span className="navigation__displayed-month_name">
+              {firstMonthName}
             </span>
-          )}
+            {firstMonthName !== lastMonthName && (
+              <span className="navigation__displayed-month_name">
+                <span className="navigation__displayed-month_separator"></span>
+                {lastMonthName}
+              </span>
+            )}
+          </div>
         </div>
       </header>
     </>

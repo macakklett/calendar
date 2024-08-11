@@ -1,19 +1,41 @@
 .header {
   display: flex;
-  height: 60px;
-  padding: 0 48px;
   align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  background-color: #f4f6f8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #45a049;
+  }
 }
 
 .create-event-btn {
-  padding: 0 16px;
-
   &__icon {
     margin-right: 8px;
+    background: linear-gradient(90deg, rgb(243, 112, 112), rgb(46, 46, 230));
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
 .navigation {
+  display: flex;
+
   &__today-btn {
     margin-left: 32px;
     padding: 0 16px;
@@ -21,14 +43,36 @@
 
   &__nav-icon {
     font-size: 16px;
+    margin: 0 15px;
     margin-left: 20px;
+    padding: 8px 12px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    background-color: transparent;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #ddd;
+      border-color: #bbb;
+    }
   }
 
   &__displayed-month {
-    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
 
     &_separator {
-      padding: 0 10px;
+      display: inline-block;
+      width: 10px;
+      height: 7px;
+      margin: 0 20px;
+      border-top: 3px solid #333;
     }
   }
 }

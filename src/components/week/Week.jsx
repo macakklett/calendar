@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Day from '../day/Day';
 import CurrentTime from '../currentTime/CurrentTime';
 import Modal from '../modal/Modal';
-import EventModalWindow from '../eventModalWindow/EventModalWindow';
+// import EventModalWindow from '../eventModalWindow/EventModalWindow';
 import { useEvents } from '../../hook/useEvents';
 import moment from 'moment';
 
@@ -15,20 +15,19 @@ const Week = ({ weekDates, isCurrentWeek }) => {
   const [selectedTime, setSelectedTime] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [isOpenEventWindow, setIsOpenEventWindow] = useState(false);
-  const [eventId, setEventId] = useState(null);
-  const [coordinatesOfClickMouse, setCoordinatesOfClickMouse] = useState(null);
-
   const closeModalWindow = () => setIsModalOpen(false);
   const closeEventModalWindow = () => setIsOpenEventWindow(false);
 
   const handleWeek = (e) => {
-    if (e.target.closest('.event')) {
-      setEventId(e.target.closest('.event').dataset.event);
-      setIsOpenEventWindow(true);
-      closeModalWindow();
-      setCoordinatesOfClickMouse([e.clientX, e.clientY]);
-    } else {
+    console.log(e.target);
+    if (
+      e.target.closest('.event') ||
+      e.target.closest('.event-overlay') ||
+      e.target.closest('.event-modal')
+    )
+      return null;
+
+    if (e.target.closest('.calendar__time-slot')) {
       const selectedDayFromDOM = parseInt(
         e.target.closest('.calendar__day').dataset.day,
         10
@@ -43,8 +42,7 @@ const Week = ({ weekDates, isCurrentWeek }) => {
 
       setSelectedDate(formattedSelectedDay);
       setSelectedTime(formattedTime);
-      setIsModalOpen(true); // Відкриває модальне вікно
-      closeEventModalWindow();
+      setIsModalOpen(true);
     }
   };
 
@@ -56,13 +54,13 @@ const Week = ({ weekDates, isCurrentWeek }) => {
         isModalOpen={isModalOpen}
         closeModalWindow={closeModalWindow}
       />
-      {isOpenEventWindow && (
+      {/* {isOpenEventWindow && (
         <EventModalWindow
           eventId={eventId}
           coordinates={coordinatesOfClickMouse}
           closeEventModalWindow={closeEventModalWindow}
         />
-      )}
+      )} */}
       <div className="calendar__week" onClick={handleWeek}>
         {isCurrentWeek && <CurrentTime />}
         {weekDates.map((dayStart) => {

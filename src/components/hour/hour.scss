@@ -1,11 +1,14 @@
 .calendar {
-  // display: flex;
-  // flex-direction: column;
-  // height: calc(100vh - 60px);
-
   &__time-slot {
-    height: 59px;
     position: relative;
-    border-bottom: 1px solid #eee;
+    height: 59px;
+    margin: 0 10px 10px 0;
+    border-bottom: 1px solid #000000;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+
+    &:hover {
+      background-color: grey;
+    }
   }
 }
