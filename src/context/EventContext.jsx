@@ -26,6 +26,7 @@ const EventProvider = ({ children }) => {
       } catch (err) {
         setError('Failed to load events. Please try again later.');
         console.error('Error fetching events:', err);
+        alert('Failed to load events. Please try again later.');
       }
     };
 
@@ -60,6 +61,7 @@ const EventProvider = ({ children }) => {
     } catch (err) {
       setError('Failed to add event into DB. Please try again later.');
       console.error('Error adding event:', err);
+      alert('Failed to add event into DB. Please try again later.');
     }
   };
 
@@ -72,6 +74,7 @@ const EventProvider = ({ children }) => {
     } catch (err) {
       setError('Failed to delete event. Please try again later.');
       console.error('Error deleting event:', err);
+      alert('Failed to delete event. Please try again later.');
     }
   };
 
