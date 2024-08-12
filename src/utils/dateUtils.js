@@ -44,7 +44,7 @@ export const getUkrainianDayNumberOfWeek = () => {
 
 export const getMinutesPassedTodayPx = () => {
   const now = new Date();
-  const minutesPassed = now.getHours() * 59 + now.getMinutes();
+  const minutesPassed = now.getHours() * 69 + now.getMinutes();
   return minutesPassed;
 };
 
