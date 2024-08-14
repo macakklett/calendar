@@ -43,10 +43,8 @@ const App = () => {
         setCurrentWeek={setCurrentWeek}
       />
       <Calendar weekDates={weekDates} isCurrentWeek={isCurrentWeek} />
-      {/* {error && <div className="error-message">{error}</div>} */}
     </>
   );
 };
 
 export default App;
-// https://calendar-like-google-calendar.netlify.app
