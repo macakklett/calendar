@@ -11,7 +11,7 @@ Calendar app is implemented for educational purposes on Netlify
 - [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [Sass (Scss)](https://sass-lang.com/)
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- [React(hooks)](https://react.dev/)
+- [React](https://react.dev/)
 - [Webpack](https://webpack.js.org/)
 
 ### Vitalii Matsan
