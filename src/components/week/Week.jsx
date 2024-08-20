@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Day from '../day/Day';
 import CurrentTime from '../currentTime/CurrentTime';
 import Modal from '../modal/Modal';
@@ -16,8 +17,7 @@ const Week = ({ weekDates, isCurrentWeek }) => {
 
   const closeModalWindow = () => setIsModalOpen(false);
 
-  const handleWeek = (e) => {
-    console.log(e.target);
+  const handleWeek = e => {
     if (
       e.target.closest('.event') ||
       e.target.closest('.event-overlay') ||
@@ -26,13 +26,8 @@ const Week = ({ weekDates, isCurrentWeek }) => {
       return null;
 
     if (e.target.closest('.calendar__time-slot')) {
-      const selectedDayFromDOM = parseInt(
-        e.target.closest('.calendar__day').dataset.day,
-        10
-      );
-      const selectedDate = weekDates.find(
-        (date) => moment(date).date() === selectedDayFromDOM
-      );
+      const selectedDayFromDOM = parseInt(e.target.closest('.calendar__day').dataset.day, 10);
+      const selectedDate = weekDates.find(date => moment(date).date() === selectedDayFromDOM);
       const formattedSelectedDay = moment(selectedDate).format('YYYY-MM-DD');
 
       const hour = parseInt(e.target.dataset.time, 10);
@@ -54,27 +49,25 @@ const Week = ({ weekDates, isCurrentWeek }) => {
       />
       <div className="calendar__week" onClick={handleWeek}>
         {isCurrentWeek && <CurrentTime />}
-        {weekDates.map((dayStart) => {
-          const dayEnd = new Date(dayStart.getTime()).setHours(
-            dayStart.getHours() + 24
-          );
+        {weekDates.map(dayStart => {
+          const dayEnd = new Date(dayStart.getTime()).setHours(dayStart.getHours() + 24);
 
-          //getting all events from the day we will render
           const dayEvents = events.filter(
-            (event) => event.dateFrom > dayStart && event.dateTo < dayEnd
+            event => event.dateFrom > dayStart && event.dateTo < dayEnd,
           );
 
           return (
-            <Day
-              key={dayStart.getDate()}
-              dataDay={dayStart.getDate()}
-              dayEvents={dayEvents}
-            />
+            <Day key={dayStart.getDate()} dataDay={dayStart.getDate()} dayEvents={dayEvents} />
           );
         })}
       </div>
     </>
   );
+};
+
+Week.propTypes = {
+  weekDates: PropTypes.arrayOf(PropTypes.instanceOf(Date)).isRequired,
+  isCurrentWeek: PropTypes.bool.isRequired,
 };
 
 export default Week;

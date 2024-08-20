@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Navigation from './../navigation/Navigation';
 import Week from '../week/Week';
@@ -18,6 +19,11 @@ const Calendar = ({ weekDates, isCurrentWeek }) => {
       </div>
     </section>
   );
+};
+
+Calendar.propTypes = {
+  weekDates: PropTypes.arrayOf(PropTypes.instanceOf(Date)).isRequired,
+  isCurrentWeek: PropTypes.bool.isRequired,
 };
 
 export default Calendar;

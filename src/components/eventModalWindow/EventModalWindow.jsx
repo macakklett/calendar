@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from 'react';
 
 import './eventModalWindow.scss';
+import PropTypes from 'prop-types';
 import { useEvents } from '../../hook/useEvents';
 
-const EventModalWindow = ({ eventId, coordinates, closeEventModalWindow }) => {
+const EventModalWindow = ({ eventId, closeEventModalWindow }) => {
   const { deleteEvent } = useEvents();
   const [position, setPosition] = useState({ top: 20, left: 20 });
-
-  // useEffect(() => {
-  //   const [x, y] = coordinates;
-  //   setPosition({ top: y, left: x });
-  // }, [coordinates]);
 
   const handleDeleteButton = () => {
     deleteEvent(eventId);
     closeEventModalWindow();
   };
 
-  const handleCloseModal = (e) => {
+  const handleCloseModal = e => {
     if (e.target.className === 'event-overlay') {
       closeEventModalWindow();
     }
@@ -33,6 +29,11 @@ const EventModalWindow = ({ eventId, coordinates, closeEventModalWindow }) => {
       </div>
     </>
   );
+};
+
+EventModalWindow.propTypes = {
+  eventId: PropTypes.string.isRequired,
+  closeEventModalWindow: PropTypes.func.isRequired,
 };
 
 export default EventModalWindow;

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 
 import './modal.scss';
 import { useEvents } from '../../hook/useEvents';
 
-const Modal = (props) => {
+const Modal = props => {
   if (!props.isModalOpen) return null;
   const { addEventToCalendar } = useEvents();
 
@@ -12,15 +13,20 @@ const Modal = (props) => {
 
   const [formData, setFormData] = useState({
     title: '',
-    date: selectedDate,
-    startTime: moment(selectedTime, 'HH:mm')
-      .subtract(1, 'hours')
-      .format('HH:mm'),
-    endTime: selectedTime,
+    date: selectedDate || moment().format('YYYY-MM-DD'),
+    startTime: selectedTime
+      ? moment(selectedTime, 'HH:mm').subtract(1, 'hours').format('HH:mm')
+      : moment().minute(0).format('HH:mm'),
+    endTime:
+      selectedTime ||
+      moment()
+        .hour(new Date().getHours() + 1)
+        .minute(0)
+        .format('HH:mm'),
     description: '',
   });
 
-  const handleChangeFormData = (e) => {
+  const handleChangeFormData = e => {
     const { name, value } = e.target;
 
     setFormData({
@@ -29,13 +35,13 @@ const Modal = (props) => {
     });
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = e => {
     e.preventDefault();
     addEventToCalendar(formData);
     closeModalWindow();
   };
 
-  const handleCloseModal = (e) => {
+  const handleCloseModal = e => {
     if (e.target === e.currentTarget) {
       closeModalWindow();
     }
@@ -47,10 +53,7 @@ const Modal = (props) => {
     <div className="modal overlay" onClick={handleCloseModal}>
       <div className="modal__content">
         <div className="create-event">
-          <button
-            className="create-event__close-btn"
-            onClick={closeModalWindow}
-          >
+          <button className="create-event__close-btn" onClick={closeModalWindow}>
             +
           </button>
           <form className="event-form" onSubmit={handleFormSubmit}>
@@ -105,6 +108,13 @@ const Modal = (props) => {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  isModalOpen: PropTypes.bool.isRequired,
+  selectedDate: PropTypes.string,
+  selectedTime: PropTypes.string,
+  closeModalWindow: PropTypes.func.isRequired,
 };
 
 export default Modal;
