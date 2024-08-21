@@ -1,27 +1,45 @@
 .event {
   position: absolute;
   width: 100%;
-  margin-left: 3px;
   background-color: #6495ed;
   z-index: 1;
-  border-radius: 8px;
-  padding: 8px;
-  color: #fff;
+  padding: 2px 0 0 10px;
+  color: #f0f4ff;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
 
   &__title {
     width: 100%;
     overflow: hidden;
+    font-size: 12px;
+    font-weight: bold;
     text-overflow: ellipsis;
     white-space: nowrap;
-    margin-bottom: 8px;
+    margin-bottom: 2px;
+  }
+
+  &__time {
+    font-size: 10px;
+    color: #333;
+  }
+
+  &__description {
+    width: 100%;
+    margin-top: 4px;
+    font-size: 12px;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &:hover {
     font-weight: bold;
     border: 2px solid #072a6b;
     background-color: #1a5cd6;
-    transform: scaleX(1.2) scaleY(1.2);
     z-index: 2;
+    transform: scaleX(1.2) scaleY(1.2);
   }
 }
 

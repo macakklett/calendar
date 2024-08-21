@@ -4,14 +4,14 @@ import EventModalWindow from '../eventModalWindow/EventModalWindow';
 
 import './event.scss';
 
-const Event = ({ height, marginTop, title, time, eventId }) => {
+const Event = ({ height, marginTop, title, description, time, eventId }) => {
   const [isOpenEventWindow, setIsOpenEventWindow] = useState(false);
 
   const closeEventModalWindow = () => setIsOpenEventWindow(false);
 
   const eventStyle = {
-    height,
-    marginTop: marginTop + '3px',
+    height: `${height}px`,
+    marginTop: `${marginTop}px`,
   };
 
   return (
@@ -27,6 +27,7 @@ const Event = ({ height, marginTop, title, time, eventId }) => {
       >
         <div className="event__title">{title}</div>
         <div className="event__time">{time}</div>
+        <div className="event__description">{description}</div>
       </div>
     </>
   );

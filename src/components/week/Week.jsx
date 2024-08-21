@@ -25,18 +25,22 @@ const Week = ({ weekDates, isCurrentWeek }) => {
     )
       return null;
 
-    if (e.target.closest('.calendar__time-slot')) {
-      const selectedDayFromDOM = parseInt(e.target.closest('.calendar__day').dataset.day, 10);
-      const selectedDate = weekDates.find(date => moment(date).date() === selectedDayFromDOM);
-      const formattedSelectedDay = moment(selectedDate).format('YYYY-MM-DD');
+    const selectedDayFromDOM = parseInt(e.target.closest('.calendar__day').dataset.day, 10);
+    const selectedDate = weekDates.find(date => moment(date).date() === selectedDayFromDOM);
+    const formattedSelectedDay = moment(selectedDate).format('YYYY-MM-DD');
 
-      const hour = parseInt(e.target.dataset.time, 10);
-      const formattedTime = moment().hour(hour).minute(0).format('HH:mm');
+    const hour = parseInt(e.target.dataset.time, 10);
+    const formattedTime = moment().hour(hour).minute(0).format('HH:mm');
 
-      setSelectedDate(formattedSelectedDay);
-      setSelectedTime(formattedTime);
-      setIsModalOpen(true);
-    }
+    setSelectedDate(formattedSelectedDay);
+    setSelectedTime(formattedTime);
+    setIsModalOpen(true);
+  };
+
+  const getEventDays = event => {
+    const eventStartDate = new Date(event.dateFrom);
+    const eventEndDate = new Date(event.dateTo);
+    return { eventStartDate, eventEndDate };
   };
 
   return (
@@ -52,9 +56,14 @@ const Week = ({ weekDates, isCurrentWeek }) => {
         {weekDates.map(dayStart => {
           const dayEnd = new Date(dayStart.getTime()).setHours(dayStart.getHours() + 24);
 
-          const dayEvents = events.filter(
-            event => event.dateFrom > dayStart && event.dateTo < dayEnd,
-          );
+          const dayEvents = events.filter(event => {
+            const { eventStartDate, eventEndDate } = getEventDays(event);
+            return (
+              (eventStartDate >= dayStart && eventStartDate < dayEnd) ||
+              (eventEndDate > dayStart && eventEndDate <= dayEnd) ||
+              (eventStartDate <= dayStart && eventEndDate >= dayEnd)
+            );
+          });
 
           return (
             <Day key={dayStart.getDate()} dataDay={dayStart.getDate()} dayEvents={dayEvents} />

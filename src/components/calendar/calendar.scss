@@ -5,6 +5,7 @@
 
   &__body {
     display: flex;
+    overflow: auto;
   }
 
   &__week-container {

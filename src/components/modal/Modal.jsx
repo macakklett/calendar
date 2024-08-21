@@ -38,6 +38,7 @@ const Modal = props => {
   const handleFormSubmit = e => {
     e.preventDefault();
     addEventToCalendar(formData);
+    console.log(formData);
     closeModalWindow();
   };
 

@@ -1,9 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import {
-  fetchAllEvents,
-  addEventToBD,
-  deleteEventFromBD,
-} from '../gateway/events';
+import { fetchAllEvents, addEventToBD, deleteEventFromBD } from '../gateway/events';
 import moment from 'moment';
 
 export const EventContext = createContext();
@@ -17,11 +13,11 @@ const EventProvider = ({ children }) => {
       try {
         const data = await fetchAllEvents();
         setEvents(
-          data.map((event) => ({
+          data.map(event => ({
             ...event,
             dateFrom: new Date(event.dateFrom),
             dateTo: new Date(event.dateTo),
-          }))
+          })),
         );
       } catch (err) {
         setError('Failed to load events. Please try again later.');
@@ -33,28 +29,29 @@ const EventProvider = ({ children }) => {
     fetchEvents();
   }, []);
 
-  const addEventToCalendar = async (eventForCalendar) => {
+  const addEventToCalendar = async eventForCalendar => {
     const { title, date, startTime, endTime, description } = eventForCalendar;
 
-    const formattingDate = (date, time) =>
-      moment(`${date} ${time}`, 'YYYY-MM-DD HH:mm').toDate();
+    const convertToDate = (date, time) => {
+      return new Date(`${date}T${time}:00`);
+    };
 
     const newEvent = {
       title,
       description,
-      dateFrom: formattingDate(date, startTime),
-      dateTo: formattingDate(date, endTime),
+      dateFrom: convertToDate(date, startTime),
+      dateTo: convertToDate(date, endTime),
     };
 
     try {
       const addedEvent = await addEventToBD(newEvent);
       if (addedEvent) {
-        setEvents((prevEvents) => [
+        setEvents(prevEvents => [
           ...prevEvents,
           {
             ...addedEvent,
-            dateFrom: new Date(addedEvent.dateFrom),
-            dateTo: new Date(addedEvent.dateTo),
+            dateFrom: moment.utc(addedEvent.dateFrom).local().toDate(),
+            dateTo: moment.utc(addedEvent.dateTo).local().toDate(),
           },
         ]);
       }
@@ -65,12 +62,10 @@ const EventProvider = ({ children }) => {
     }
   };
 
-  const deleteEvent = async (eventId) => {
+  const deleteEvent = async eventId => {
     try {
       await deleteEventFromBD(eventId);
-      setEvents((prevEvents) =>
-        prevEvents.filter((event) => event.id !== eventId)
-      );
+      setEvents(prevEvents => prevEvents.filter(event => event.id !== eventId));
     } catch (err) {
       setError('Failed to delete event. Please try again later.');
       console.error('Error deleting event:', err);
@@ -80,9 +75,7 @@ const EventProvider = ({ children }) => {
 
   const value = { events, addEventToCalendar, deleteEvent, error };
 
-  return (
-    <EventContext.Provider value={value}>{children}</EventContext.Provider>
-  );
+  return <EventContext.Provider value={value}>{children}</EventContext.Provider>;
 };
 
 export default EventProvider;
