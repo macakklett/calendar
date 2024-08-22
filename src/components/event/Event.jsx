@@ -27,7 +27,7 @@ const Event = ({ height, marginTop, title, description, time, eventId }) => {
       >
         <div className="event__title">{title}</div>
         <div className="event__time">{time}</div>
-        <div className="event__description">{description}</div>
+        {description && <div className="event__description">{description}</div>}
       </div>
     </>
   );
@@ -37,6 +37,7 @@ Event.propTypes = {
   height: PropTypes.number.isRequired,
   marginTop: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  description: PropTypes.string,
   time: PropTypes.string.isRequired,
   eventId: PropTypes.string.isRequired,
 };
