@@ -23,7 +23,7 @@ const EventModalWindow = ({ eventId, closeEventModalWindow }) => {
     <>
       <div className="event-overlay" onClick={handleCloseModal}></div>
       <div className="event-modal" style={position}>
-        <i class="fas fa-trash-alt"></i>
+        <i className="fas fa-trash-alt"></i>
         <button className="delete-button" onClick={handleDeleteButton}>
           Delete
         </button>

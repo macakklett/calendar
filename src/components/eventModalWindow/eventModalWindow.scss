@@ -1,5 +1,9 @@
 .event-modal {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   width: 150px;
   height: 60px;
   padding: 10px;
@@ -8,10 +12,6 @@
   background-color: #ffffff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 11;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  align-items: center;
 }
 
 .event-overlay {
@@ -26,9 +26,9 @@
 
 .delete-button {
   padding: 6px 20px;
+  background-color: #f0f0f0;
   border: 1px solid #d1d1d1;
   border-radius: 4px;
-  background-color: #f0f0f0;
   color: #333;
   cursor: pointer;
   transition: all 0.3s linear;
