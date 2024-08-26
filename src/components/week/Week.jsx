@@ -58,11 +58,7 @@ const Week = ({ weekDates, isCurrentWeek }) => {
 
           const dayEvents = events.filter(event => {
             const { eventStartDate, eventEndDate } = getEventDays(event);
-            return (
-              (eventStartDate >= dayStart && eventStartDate < dayEnd) ||
-              (eventEndDate > dayStart && eventEndDate <= dayEnd) ||
-              (eventStartDate <= dayStart && eventEndDate >= dayEnd)
-            );
+            return eventStartDate >= dayStart && eventEndDate < dayEnd;
           });
 
           return (

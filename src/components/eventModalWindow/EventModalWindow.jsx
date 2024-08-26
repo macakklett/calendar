@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import './eventModalWindow.scss';
 import PropTypes from 'prop-types';
@@ -23,6 +23,7 @@ const EventModalWindow = ({ eventId, closeEventModalWindow }) => {
     <>
       <div className="event-overlay" onClick={handleCloseModal}></div>
       <div className="event-modal" style={position}>
+        <i class="fas fa-trash-alt"></i>
         <button className="delete-button" onClick={handleDeleteButton}>
           Delete
         </button>
