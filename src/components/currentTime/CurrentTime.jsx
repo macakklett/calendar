@@ -28,8 +28,8 @@ const CurrentTime = () => {
 
   return (
     <div style={style} className="line-container">
-      <div className="line-container_circle"></div>
-      <div className="line-container_line"></div>
+      <div className="line-container_circle" />
+      <div className="line-container_line" />
     </div>
   );
 };

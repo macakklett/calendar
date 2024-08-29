@@ -7,14 +7,14 @@ import Sidebar from '../sidebar/Sidebar';
 
 import './calendar.scss';
 
-const Calendar = ({ weekDates, isCurrentWeek }) => {
+const Calendar = ({ weekDates }) => {
   return (
     <section className="calendar">
       <Navigation weekDates={weekDates} />
       <div className="calendar__body">
         <div className="calendar__week-container">
           <Sidebar />
-          <Week weekDates={weekDates} isCurrentWeek={isCurrentWeek} />
+          <Week weekDates={weekDates} />
         </div>
       </div>
     </section>
@@ -23,7 +23,6 @@ const Calendar = ({ weekDates, isCurrentWeek }) => {
 
 Calendar.propTypes = {
   weekDates: PropTypes.arrayOf(PropTypes.instanceOf(Date)).isRequired,
-  isCurrentWeek: PropTypes.bool.isRequired,
 };
 
 export default Calendar;

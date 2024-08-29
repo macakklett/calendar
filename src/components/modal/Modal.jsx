@@ -5,11 +5,9 @@ import moment from 'moment';
 import './modal.scss';
 import { useEvents } from '../../hook/useEvents';
 
-const Modal = props => {
-  if (!props.isModalOpen) return null;
+const Modal = ({ isModalOpen, selectedDate, selectedTime, closeModalWindow }) => {
+  if (!isModalOpen) return null;
   const { addEventToCalendar } = useEvents();
-
-  const { selectedDate, selectedTime, closeModalWindow } = props;
 
   const [formData, setFormData] = useState({
     title: '',
@@ -38,7 +36,6 @@ const Modal = props => {
   const handleFormSubmit = e => {
     e.preventDefault();
     addEventToCalendar(formData);
-    console.log(formData);
     closeModalWindow();
   };
 

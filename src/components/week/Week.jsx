@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Day from '../day/Day';
 import CurrentTime from '../currentTime/CurrentTime';
 import Modal from '../modal/Modal';
 import { useEvents } from '../../hook/useEvents';
+import { isTodayInWeekDates } from '../../utils/dateUtils';
 import moment from 'moment';
 
 import './week.scss';
 
-const Week = ({ weekDates, isCurrentWeek }) => {
+const Week = ({ weekDates }) => {
   const { events } = useEvents();
+  const [isPresentWeek, setIsPresentWeek] = useState(true);
+
+  useEffect(() => {
+    setIsPresentWeek(isTodayInWeekDates(weekDates));
+  }, [weekDates]);
 
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
@@ -52,7 +58,7 @@ const Week = ({ weekDates, isCurrentWeek }) => {
         closeModalWindow={closeModalWindow}
       />
       <div className="calendar__week" onClick={handleWeek}>
-        {isCurrentWeek && <CurrentTime />}
+        {isPresentWeek && <CurrentTime />}
         {weekDates.map(dayStart => {
           const dayEnd = new Date(dayStart.getTime()).setHours(dayStart.getHours() + 24);
 
@@ -72,7 +78,6 @@ const Week = ({ weekDates, isCurrentWeek }) => {
 
 Week.propTypes = {
   weekDates: PropTypes.arrayOf(PropTypes.instanceOf(Date)).isRequired,
-  isCurrentWeek: PropTypes.bool.isRequired,
 };
 
 export default Week;

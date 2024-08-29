@@ -1,23 +1,32 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Modal from '../modal/Modal';
+import { getWeekStartDate } from '../../utils/dateUtils';
 import moment from 'moment';
 
 import './header.scss';
 
-const Header = ({ weekDates, changeWeek, setCurrentWeek }) => {
+const Header = ({ weekDates, setCurrentWeek, setWeekStartDate }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCreateEvent = () => setIsModalOpen(true);
 
   const closeModalWindow = () => setIsModalOpen(false);
 
+  const changeWeek = direction => {
+    setWeekStartDate(prevDate => {
+      const newDate = new Date(prevDate);
+      newDate.setDate(prevDate.getDate() + direction * 7);
+      return getWeekStartDate(newDate);
+    });
+  };
+
   const firstMonthName = moment(weekDates[0]).format('MMMM');
   const lastMonthName = moment(weekDates[weekDates.length - 1]).format('MMMM');
 
   return (
     <>
-      {isModalOpen && <Modal isModalOpen={isModalOpen} closeModalWindow={closeModalWindow} />}
+      <Modal isModalOpen={isModalOpen} closeModalWindow={closeModalWindow} />
       <header className="header">
         <button className="button create-event-btn" onClick={handleCreateEvent}>
           <i className="fas fa-plus create-event-btn__icon"></i>Create
@@ -49,7 +58,7 @@ const Header = ({ weekDates, changeWeek, setCurrentWeek }) => {
 
 Header.propTypes = {
   weekDates: PropTypes.arrayOf(PropTypes.instanceOf(Date)).isRequired,
-  changeWeek: PropTypes.func.isRequired,
+  setWeekStartDate: PropTypes.func.isRequired,
   setCurrentWeek: PropTypes.func.isRequired,
 };
 

@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-
-import './eventModalWindow.scss';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useEvents } from '../../hook/useEvents';
 
+import './eventModalWindow.scss';
+
 const EventModalWindow = ({ eventId, closeEventModalWindow }) => {
   const { deleteEvent } = useEvents();
-  const [position, setPosition] = useState({ top: 20, left: 20 });
 
   const handleDeleteButton = () => {
     deleteEvent(eventId);
@@ -22,8 +21,8 @@ const EventModalWindow = ({ eventId, closeEventModalWindow }) => {
   return (
     <>
       <div className="event-overlay" onClick={handleCloseModal}></div>
-      <div className="event-modal" style={position}>
-        <i className="fas fa-trash-alt"></i>
+      <div className="event-modal">
+        <i className="fas fa-trash-alt" />
         <button className="delete-button" onClick={handleDeleteButton}>
           Delete
         </button>

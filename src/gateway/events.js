@@ -10,7 +10,6 @@ export const fetchAllEvents = async () => {
     return data;
   } catch (error) {
     console.error(error);
-    return null;
   }
 };
 
@@ -30,8 +29,6 @@ export const addEventToBD = async (event) => {
     return data;
   } catch (error) {
     console.error(error);
-    // Можна обробити помилку тут або перекинути її далі
-    return null;
   }
 };
 
@@ -44,10 +41,7 @@ export const deleteEventFromBD = async (eventId) => {
     if (!response.ok) {
       throw new Error('Failed to delete event');
     }
-
-    // return await response.json();
   } catch (error) {
     console.error('Error deleting event:', error);
-    throw error;
   }
 };
