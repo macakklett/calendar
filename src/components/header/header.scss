@@ -1,12 +1,11 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   height: 60px;
   padding: 10px 20px;
   margin-bottom: 10px;
   background-color: #f4f6f8;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px #0000001a;
 }
 
 .button {
@@ -27,7 +26,7 @@
 .create-event-btn {
   &__icon {
     margin-right: 8px;
-    background: linear-gradient(90deg, rgb(243, 112, 112), rgb(46, 46, 230));
+    background: linear-gradient(90deg, #f37070, #2e2ee6);
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -46,15 +45,15 @@
     margin: 0 15px;
     margin-left: 20px;
     padding: 8px 12px;
-    border: 2px solid #ccc;
+    border: 2px solid #cccccc;
     border-radius: 50%;
     background-color: transparent;
     transition: all 0.3s ease;
     cursor: pointer;
 
     &:hover {
-      background-color: #ddd;
-      border-color: #bbb;
+      background-color: #dddddd;
+      border-color: #bbbbbb;
     }
   }
 
@@ -65,14 +64,14 @@
     margin-left: 20px;
     font-size: 18px;
     font-weight: bold;
-    color: #333;
+    color: #333333;
 
     &_separator {
       display: inline-block;
       width: 10px;
       height: 7px;
       margin: 0 20px;
-      border-top: 3px solid #333;
+      border-top: 3px solid #333333;
     }
   }
 }

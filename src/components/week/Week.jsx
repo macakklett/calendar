@@ -51,12 +51,11 @@ const Week = ({ weekDates }) => {
 
   return (
     <>
-      <Modal
+      {isModalOpen && <Modal
         selectedDate={selectedDate}
         selectedTime={selectedTime}
-        isModalOpen={isModalOpen}
         closeModalWindow={closeModalWindow}
-      />
+      />}
       <div className="calendar__week" onClick={handleWeek}>
         {isPresentWeek && <CurrentTime />}
         {weekDates.map(dayStart => {

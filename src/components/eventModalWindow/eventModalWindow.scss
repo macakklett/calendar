@@ -12,7 +12,7 @@
   border: 1px solid #d1d1d1;
   border-radius: 8px;
   background-color: #ffffff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px #0000001a;
   z-index: 11;
 }
 
@@ -22,7 +22,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: #00000040;
   z-index: 10;
 }
 
@@ -31,7 +31,7 @@
   background-color: #f0f0f0;
   border: 1px solid #d1d1d1;
   border-radius: 4px;
-  color: #333;
+  color: #333333;
   cursor: pointer;
   transition: all 0.3s linear;
 

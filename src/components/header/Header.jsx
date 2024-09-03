@@ -26,7 +26,7 @@ const Header = ({ weekDates, setCurrentWeek, setWeekStartDate }) => {
 
   return (
     <>
-      <Modal isModalOpen={isModalOpen} closeModalWindow={closeModalWindow} />
+      {isModalOpen && <Modal closeModalWindow={closeModalWindow} />}
       <header className="header">
         <button className="button create-event-btn" onClick={handleCreateEvent}>
           <i className="fas fa-plus create-event-btn__icon"></i>Create
